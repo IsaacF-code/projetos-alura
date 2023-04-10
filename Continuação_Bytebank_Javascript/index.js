@@ -1,27 +1,19 @@
 import { Cliente } from "./Cliente.js";
-import { ContaCorrente } from "./ContaCorrente.js";
+import { Diretor } from "./Funcionario/Diretor.js";
+import { Gerente } from "./Funcionario/Gerente.js";
+import { SistemaAutenticacao } from "./SistemaAutenticacao.js";
 
+const cliente1 = new Cliente("Isaac", 11122233309);
 
-const cliente1 = new Cliente("Isaac", 11122233309); // instanciando um objeto da classe Cliente
-const cliente2 = new Cliente("Freires", 88822233309);
+const diretor = new Diretor("Isaac", 10000, 12345678900);
+diretor.cadastrarSenha("123");
 
-const contaCorrenteIsaac = new ContaCorrente(1001, cliente1);
+const gerente = new Gerente("Freires", 5000, 12345678901);
+gerente.cadastrarSenha("321");
 
-contaCorrenteIsaac.depositar(200);
+const gerenteEstaLogado = SistemaAutenticacao.login(gerente, "321");
+const diretorEstaLogado = SistemaAutenticacao.login(diretor, "123");
 
-const conta2 = new ContaCorrente(102, cliente2);
+const clienteEstaLogado = SistemaAutenticacao.login(cliente1, "456");
 
-let valor = 50;
-contaCorrenteIsaac.transferir(valor, conta2);
-
-console.log("Cliente 1:");
-console.log(cliente1);
-
-console.log(".......................");
-
-console.log("Conta Corrente do Cliente 1:");
-console.log(contaCorrenteIsaac);
-
-console.log(".......................");
-
-console.log("Número de Contas: " + ContaCorrente.numeroDeContas);
+console.log(gerenteEstaLogado, diretorEstaLogado, clienteEstaLogado);
